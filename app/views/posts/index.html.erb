@@ -1,0 +1,15 @@
+<h1>recent tweets</h1>
+
+<% if user_signed_in? %>
+	<%= link_to "new tweet", new_post_path %>
+<% end %>
+
+<% @posts.each do |post| %>
+<!-- Use = when displaying content, just % when not -->
+	<p>
+		<%= link_to "#{post.user.handle}", user_path(post.user_id) rescue nil %>
+		<%= post.content %>
+		<%= link_to "edit", edit_post_path(post) if post.user.id == current_user.id rescue nil %>
+		<%= link_to "delete", post, method: 'delete' if post.user.id == current_user.id rescue nil %>
+	</p>
+<% end %>

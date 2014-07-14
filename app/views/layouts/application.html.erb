@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tweeter</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if current_user %>
+	<%= link_to "home", posts_path, :class => "button" %> | 
+	<%= link_to "log out", destroy_user_session_path, method: 'delete', :class => "button" %> |
+	<%= link_to "edit profile", edit_user_registration_path(current_user), :class => "button" %>
+<% else %>
+	<%= link_to "sign in", new_user_session_path %>
+	<%= link_to "sign up", new_user_registration_path %>
+<% end %>
+
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<%= yield %>
+
+</body>
+</html>
